@@ -9,8 +9,6 @@ This Web service is for sales reporting
 
 ## Onboarding and Development Guide
 
-### Documentations
-- [Api Docs - Postman](https://documenter.getpostman.com/view/7094340/2s93XyShz7)
 ### Prerequisite
 - Git (See [Git Installation](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git))
 - Php 8 or later (See [PHP Installation](https://www.php.net/downloads))
