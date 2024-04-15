@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/sales', [SalesController::class, 'create'])->name('sales.create');
     Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
-    Route::get('/sales/report', [SalesController::class, 'report'])->name('sales.report');
+    Route::post('/sales/report', [SalesController::class, 'report'])->name('sales.report');
 
 });
 

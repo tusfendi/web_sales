@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SalesExport;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Sales\StoreRequest;
 use App\Http\Requests\Sales\ReportRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Sales;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SalesController extends Controller
 {
@@ -47,7 +49,12 @@ class SalesController extends Controller
      */
     public function report(ReportRequest $request)
     {
-        //
+        $request->validated();
+        $user = $request->user();
+        $requestor = $user->name . ' (' . $user->email . ')';
+        $file = "sales-report-" . date('Y-m-d_H:i:s') . ".xlsx";
+    
+        return Excel::download(new SalesExport($requestor, $request->start_date, $request->end_date), $file);
     }
 
     

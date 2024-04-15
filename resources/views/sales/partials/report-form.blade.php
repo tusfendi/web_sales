@@ -18,16 +18,16 @@
             <x-input-error class="mt-2" :messages="$errors->get('start_date')" />
         </div>
 
-        <!-- <div>
+        <div>
             <x-input-label for="end_date" :value="__('End date')" />
             <x-text-input id="end_date" name="end_date" type="date" class="mt-1 block w-full" required autofocus autocomplete="end_date" />
             <x-input-error class="mt-2" :messages="$errors->get('end_date')" />
-        </div> -->
+        </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Download xlxs') }}</x-primary-button>
 
-            @if (session('status') === 'data-downloaded')
+            @if (session('status-download') === 'data-downloaded')
                 <p
                     x-data="{ show: true }"
                     x-show="show"
