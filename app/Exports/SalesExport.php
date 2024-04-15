@@ -9,10 +9,10 @@ use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class SalesExport implements FromArray, WithHeadings, WithStyles, WithColumnWidths
+class SalesExport implements FromArray, WithHeadings, WithStyles, WithColumnWidths, WithStrictNullComparison
 {
 
     private $requestor, $start_date, $end_date;
@@ -54,10 +54,10 @@ class SalesExport implements FromArray, WithHeadings, WithStyles, WithColumnWidt
         foreach ($report as $item) {
             $data[] = [
                 $item->name,
-                $item->total_hari,
-                $item->total_transaksi_barang,
+                $item->total_hari ?? 0,
+                $item->total_transaksi_barang ?? 0,
                 $item->total_transaksi - $item->total_transaksi_barang,
-                $item->total_nominal_barang,
+                $item->total_nominal_barang ?? 0,
                 $item->total_nominal - $item->total_nominal_barang,
             ];
         }
@@ -86,14 +86,4 @@ class SalesExport implements FromArray, WithHeadings, WithStyles, WithColumnWidt
         return $coll;
     }
 
-    public function columnFormats(): array
-    {
-        return [
-            'B' => NumberFormat::FORMAT_TEXT,
-            'C' => NumberFormat::FORMAT_TEXT,
-            'D' => NumberFormat::FORMAT_TEXT,
-            'E' => NumberFormat::FORMAT_TEXT,
-            'F' => NumberFormat::FORMAT_TEXT,
-        ];
-    }
 }
